@@ -11,12 +11,8 @@ if [[ "$1" = "--complete" ]]; then
   exit
 fi
 
-shopt -s nullglob
-
-for command in "${PLENV_ROOT}/shims/"*; do
-  if [[ "$1" = "--short" ]]; then
-    echo "${command##*/}"
-  else
-    echo "$command"
-  fi
-done | sort
+if [[ "$1" = "--short" ]]; then
+  command -p ls -1N "$PLENV_ROOT"/shims
+else
+  command -p ls -1N "$PLENV_ROOT"/shims/*
+fi
